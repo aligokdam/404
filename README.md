@@ -2,7 +2,7 @@
 
 A 404 page with nothing on it but **404** and **Pars** — an original character rebuilt from lines of code.
 
-![preview](preview.png)
+**Live demo:** [aligokdam.github.io/404](https://aligokdam.github.io/404/)
 
 ## How it works
 
@@ -31,13 +31,10 @@ A 404 page with nothing on it but **404** and **Pars** — an original character
 | Nginx | `error_page 404 /404.html;` |
 | Apache | `ErrorDocument 404 /404.html` |
 
-## Türkçe
-
-Ekranda yalnızca **404** ve **Pars** var. Üstte sabit, mor bir 404; altında oturan Pars,
-orijinal çizimden kod satırlarına çevrildi ve terminal header SVG'sindeki döngüyle (24.46 sn)
-çiziliyor, bekliyor, kapanıyor ve tekrar başlıyor. İmleç yaklaşınca Pars'ın satırları mor parlayarak dalgalanıyor,
-tıklayınca kod katmanını silkeliyor. Arkada ince mor yörünge çizgileri ve çizgili bir gezegen var.
-
 ## License
 
-Code: [MIT](LICENSE). The **Pars** character and artwork are © Ali Gökdam — not to be reused without permission.
+MIT License
+
+---
+
+Created by **Ali Gökdam**
