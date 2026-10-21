@@ -6,21 +6,19 @@ A 404 page with nothing on it but **404** and **Pars** an original character reb
 
 ## How it works
 
-- **Pars in code lines** — the artwork is converted into colored ASCII: every cell is a character,
-  every character keeps the color of the pixel underneath.
-- **Steady 404** — a plain, purple `404` at the top that never moves or animates.
-- **The loop** — Pars sits below it and follows the terminal-header SVG timing (24.46 s,
-  keyTimes `0 · .0164 · .2003 · .9673 · .9988 · 1`): a scan beam draws him top-to-bottom →
-  he stays → he collapses → repeat.
+- **Pars in code lines**
+  
+- **Steady 404**
+  
+- **The loop**
+  
 - **Pars is never still**
-  - rows near the cursor ripple sideways and glow purple
-  - characters rewrite themselves now and then, like live code
-  - click / tap Pars and he shakes off the whole code layer
-  - with no mouse (or on mobile) an invisible cursor drifts over him
-- **Thin purple lines** — orbit lines with moving dashes and a hatched planet. The background moves
-  on its own; the planet's surface drifts slowly while the planet itself stays in place.
-- **No links** — the page is only a 404; nothing on it navigates anywhere.
-- Zero dependencies, one HTML file, `prefers-reduced-motion` respected.
+  
+- **Thin purple lines**
+  
+- **No links**
+  
+- **Zero dependencies, one HTML file, `prefers-reduced-motion` respected.**
 
 ## Use it
 
