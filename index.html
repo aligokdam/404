@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0a0614">
+<title>404</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23140a2a'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='12' font-weight='700' text-anchor='middle' fill='%23c4a5ff'%3E404%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#0a0614; --bg2:#160b2e; --line:#8b5cf6; --lilac:#c4a5ff; --glow:#a78bfa;
+    --T:24.46s;               /* one loop — same length as the terminal header SVG */
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{
+    background:radial-gradient(120% 90% at 50% 40%, var(--bg2) 0%, var(--bg) 62%);
+    overflow:hidden; font-family:var(--mono); color:var(--lilac);
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  /* ---------- thin purple lines ---------- */
+  #sky{position:fixed; inset:-4%; width:108%; height:108%; pointer-events:none}
+  #sky .orbit{fill:none; stroke:var(--line); stroke-opacity:.16; stroke-width:1; vector-effect:non-scaling-stroke}
+  #sky .comet{fill:none; stroke:var(--lilac); stroke-opacity:.55; stroke-width:1.4; stroke-linecap:round;
+              vector-effect:non-scaling-stroke; animation:fly linear infinite}
+  #sky .hatch{fill:none; stroke:var(--line); stroke-opacity:.22; stroke-width:1; vector-effect:non-scaling-stroke}
+  #sky .twinkle{animation:tw 3.2s ease-in-out infinite}
+  @keyframes fly{to{stroke-dashoffset:-2000}}
+  @keyframes tw{50%{opacity:.25}}
+
+  /* ---------- center stage ---------- */
+  .stage{position:fixed; inset:0; display:grid; place-items:center; padding:16px}
+  .stack{display:flex; flex-direction:column; align-items:center; will-change:transform}
+  pre{margin:0; white-space:pre; line-height:1.12; letter-spacing:0; font-size:var(--fs,9px)}
+
+  #pars{position:relative; z-index:2; cursor:pointer; outline:none;
+        text-shadow:0 0 7px #a78bfa30;
+        animation:revealDown var(--T) linear infinite}
+  #pars .r{display:block; min-height:1.12em; will-change:transform}
+  #pars .r.hot span{color:#e9d5ff!important; text-shadow:0 0 8px #a78bfa}
+
+  /* the 404 itself: plain, steady, always there */
+  #four{display:block; margin:0; position:relative; z-index:1; cursor:default;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-weight:800; font-size:var(--f404,160px); line-height:.86; letter-spacing:-.045em;
+        background:linear-gradient(180deg,#f3e8ff 0%,#c4a5ff 45%,#8b5cf6 100%);
+        -webkit-background-clip:text; background-clip:text; color:transparent;
+        filter:drop-shadow(0 0 28px #8b5cf655);
+        margin-bottom:calc(var(--fs,9px) * 1.6); user-select:none}
+
+  /* ground line Pars sits on */
+  .ground{height:1px; width:115%; margin-left:-7.5%; margin-top:calc(var(--fs,9px) * -.6);
+          background:linear-gradient(90deg,transparent,#a78bfa99,transparent);
+          box-shadow:0 0 14px 1px #8b5cf655}
+
+  /* scan beam that draws Pars, like the clipPath reveal in the SVG */
+  .scan{position:absolute; left:-6%; right:-6%; height:2px; top:0; z-index:3; pointer-events:none;
+        background:linear-gradient(90deg,transparent,#c4a5ffcc,transparent);
+        box-shadow:0 0 22px 6px #8b5cf655; animation:scan var(--T) linear infinite}
+  .art{position:relative}
+
+  /* keyTimes from the header SVG: 0 · .0164 · .2003 · .9673 · .9988 · 1 */
+  @keyframes revealDown{
+    0%,1.64%{clip-path:inset(0 0 100% 0)}
+    20.03%,96.73%{clip-path:inset(0 0 0 0)}
+    99.88%,100%{clip-path:inset(0 0 100% 0)}
+  }
+  @keyframes scan{
+    0%,1.64%{top:0;opacity:0} 2%{opacity:1}
+    20.03%{top:100%;opacity:1} 21%,100%{top:100%;opacity:0}
+  }
+
+  /* the planet surface drifts slowly while the planet itself stays put */
+  #hatch{animation:drift 90s ease-in-out infinite alternate}
+  @keyframes drift{to{transform:translate(-180px,40px)}}
+
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+  @media (prefers-reduced-motion:reduce){
+    #pars,.scan,#sky *,#hatch{animation:none!important}
+    .scan{display:none}
+  }
+</style>
+</head>
+<body>
+
+<svg id="sky" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <radialGradient id="planet" cx="35%" cy="25%" r="80%">
+      <stop offset="0" stop-color="#4c1d95" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#2e1065" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#0a0614" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="planetClip"><circle cx="1360" cy="1240" r="640"/></clipPath>
+  </defs>
+  <g id="far">
+    <!-- orbits -->
+    <g transform="rotate(-17 1360 1240)">
+      <ellipse class="orbit" cx="1360" cy="1240" rx="820"  ry="700"/>
+      <ellipse class="orbit" cx="1360" cy="1240" rx="980"  ry="820"/>
+      <ellipse class="orbit" cx="1360" cy="1240" rx="1160" ry="960"/>
+      <ellipse class="orbit" cx="1360" cy="1240" rx="1360" ry="1110"/>
+      <ellipse class="orbit" cx="1360" cy="1240" rx="1580" ry="1280"/>
+      <ellipse class="comet" cx="1360" cy="1240" rx="980"  ry="820"  stroke-dasharray="18 330"  style="animation-duration:38s"/>
+      <ellipse class="comet" cx="1360" cy="1240" rx="1160" ry="960"  stroke-dasharray="10 420"  style="animation-duration:52s"/>
+      <ellipse class="comet" cx="1360" cy="1240" rx="1360" ry="1110" stroke-dasharray="26 520"  style="animation-duration:46s"/>
+      <ellipse class="comet" cx="1360" cy="1240" rx="1580" ry="1280" stroke-dasharray="12 610"  style="animation-duration:64s"/>
+    </g>
+    <!-- small bodies -->
+    <circle class="twinkle" cx="170"  cy="640" r="7"  fill="#6d28d9" opacity=".7"/>
+    <circle class="twinkle" cx="120"  cy="860" r="12" fill="#5b21b6" opacity=".6" style="animation-delay:1.2s"/>
+    <circle class="twinkle" cx="1460" cy="160" r="2.5" fill="#c4a5ff" style="animation-delay:.6s"/>
+    <circle class="twinkle" cx="300"  cy="180" r="2"   fill="#c4a5ff" style="animation-delay:2s"/>
+    <circle class="twinkle" cx="820"  cy="90"  r="1.6" fill="#c4a5ff" style="animation-delay:1.6s"/>
+    <circle class="twinkle" cx="560"  cy="900" r="1.8" fill="#c4a5ff" style="animation-delay:.3s"/>
+    <path d="M1225 368 a34 34 0 1 0 40 38 a28 28 0 1 1 -40 -38z" fill="#7c3aed" opacity=".55"/>
+  </g>
+  <g id="near">
+    <!-- planet made of thin lines -->
+    <circle cx="1360" cy="1240" r="640" fill="url(#planet)"/>
+    <g clip-path="url(#planetClip)" id="hatch"></g>
+    <circle cx="1360" cy="1240" r="640" fill="none" stroke="#a78bfa" stroke-opacity=".35" stroke-width="1" vector-effect="non-scaling-stroke"/>
+  </g>
+</svg>
+
+<main class="stage">
+  <div class="stack" id="stack">
+    <h1 id="four">404</h1>
+    <div class="art" id="art">
+      <pre id="pars" tabindex="-1" aria-hidden="true"></pre>
+      <div class="scan" aria-hidden="true"></div>
+      <div class="ground" aria-hidden="true"></div>
+    </div>
+  </div>
+</main>
+
+<script>
+/* ---------- Pars as code lines (generated from the artwork) ---------- */
+const PAL={"a":"#6d4199","b":"#3b2a5c","c":"#fcd8d8","d":"#d8d8d8","e":"#f1c5f1","f":"#c599c5","g":"#c599f1","h":"#996dc5","i":"#996d99","j":"#d8b4d8","k":"#b4b4d8","l":"#fcfcfc","m":"#c56dc5"};
+const ROWS=["                                         <!~?                               ", "                                         Il_l<-I                            ", "                     ;QY      l~~lil_~    I-li??-^             ;a           ", "                    :*WY       _!>~!_l->_?!l--?i<l_  l         ;*$\"         ", "                   :@%8Ba       +<>i!il->_+<+>-ll_~!<!+~       ^#@$,        ", "                  ,8$B$B#U  >+?lI>?-?+>~?<I+<!-l+Ii>!i~~:     ^MB%@O\"       ", "                  p@&%8%WM#L1i?iI+-!>>I!~_<--<!_-??I+?_~~   :q#B%*W#\"       ", "                  BM#8$*#*$M@#<oXUQoq1?>jj+ll++++>l!l<>+)k]\"@8M@*@&#,       ", "                  @8M8W@@@8W$W0q0QkbwXX/u/Qj+<<lili+i<i+]bwU{qWBM%8#:       ", "               +  q#MMM*M$BMoobwChhCXXJkCpQQX/(>_i-<>_x!YwdakpvM@M@k^       ", "               +!-IMMMB$#hYmkkhbJhY0Q>[{kdhXUdmv-_i>nvhuk0kOhQd1%#%:        ", "                <l?i%#W&JCwCOCd0JqbL0LpkqmpQwmUw]<_+dXqmkotv}J0J}O,         ", "         IL/1  ~?>~!ckabmUOYLpUOXUOUo0UOJdXmhpOoC[_|JLOYLQZZkQZdk?       )/<", "          ^O[]Xv_i_+0dJpbhqkZQ0mQCqwYCXUOpLYUqkZo0ZYdLLOdXOwmhm0YZ\"  j)Xmq} ", "           u>_?(0k]}OUCqaYqXZZ0UakCoqmbCZoCYkpkCkkaXa0UXYCwJqdhYXh?|bOXn}k  ", "            cl?_luOUO0Q0dbqUbZYoQUoCmOZoaCXbYbOJQbZkZdddJhQZUbXZdUvdOqiiU   ", "            zl!_><1okOJw0bbqXLXbdqZCpwqmJmXmmqJQXZOwUqqaUwpOYOJYZC0Opv<(<   ", "            ~]?~__i}YpdoCZbYhC)::,tZOOq0ZbhqJLLUQkbh0dmdpChQ0U)mhUf|<>z(    ", "             ]xr~_i~/mYbOawCkkQ^,\"::::tXCYpbabXUqkdd0J0CCk{:^;^XC0-I?>!     ", "              ?/_?~l{UZkaQqO0oX^;,:,,\"b;\";|XpZYXQbpUO0pj\":^,:,:QXZ_liui     ", "               tQ|n|/tJoboL0bpYo\":^\"^;\":^^\":nmJULmQL?;:Y&:,,:\"JXU>l<xl      ", "                 c(qwZxUYbQwhdQmw:^:\":^:^:}YOQUomwOmo^,,,,^;^X0Jbd~/:       ", "                      :CbLXZCo0mmdwoUv(qL0pUYbhhmLpJUOo}\"^xbdL0Cpdo?i       ", "                       cJZZOaOwOOQd0L00CZaQmUqO0kk0JdYJXb0dwYZ0JYQoa\"       ", "                        }wkLdoOXJoowQYwmCYQOYoQXmpwLoZUQYbhbUpJqhC?h        ", "              })qOpZZp^  tawppXwQqqQXpLp#UqawdLCXYhCqUaowkLCwZLkLUlrui      ", "           tCYufI-?qUo\"    |oqoQbLaQYqkLqwJC0QYhYmJqodhZpZa0pqjnkd)]]obn|   ", "         nn)+~ll!<:<Ud;  ;[YCUmkUYkqCXUoJQCbZL0UwoOLmoOdCOku(  ;Oo_ifjIi)~\" ", "          ?>?<~!>lkI?jd_vaJOhqwOqwaCwmUd0LoYZkOZamXY0CZoppkj^  Cb0-?[]Y]-   ", "        jt ^_<_i~a>-!ij-bLCX0CdJUCOqOXYhjzdokb0LXYYhXqL0LYJXoc(1~iv-?_??p;  ", "  )vZUZYbhX~~+l?+!il>i?YJmOYOhpkOZQUkX)>ii!<i~<-i~??hbbkXXp0aZi~--la!!IIl{; ", "\"jCXXYCYUYUzj(c?l~liiilYYUZbJCJQZmmpOXw/tYwmovbZo]x]~kJwbYhaQUa,!~Ivi>I I,: ", "   ^uLbawkOaLZQ0:     \"JUbhJmwJqq}pXwQZOphkLq0dChooYw-mkCdhmLdd,   ;i       ", "    \"md0kQOZo1C|      ,okwL0mQOJLJQqCCZZpOQJJOQqdYXqp0kZdXCOoqX\"            ", "     xaapia0L{         npmOJp0qLOpbdXopkLmXqbJYOc(LQkwJadhQbkXw             ", "      ;fx nQLq_{j[/ /rr^XUppwaOJ0Zqk0qdQLCUQbh01wpdZhCbw0OqOpLu^/j|  tf+    ", "           :po}j1tqY}zfC;waXXQUZOoJaC0LdwC(rcLooUhZQbQkUdJhJ/:01uucYbd1b0u  ", "            \"h]!<nabtnjpp?ULwXXoYmJkbu1[(~?!<l?<fu_hQZpfp>_[Ztwur<vOk<i?bJ, ", "           \"ftCaUYqhqhaYqZJXYQbo[khr-!??-?liI??+?!l?!YpJXwCZhOZLpYfXpzz[bav ", "           I{xaqd}I?~-zCbphJUbQCXpXX??llil!+I>-i+!I<CUZhbdOYYXY]}~>>-)bo[fj-", "            dbLC{<?!?~+~dOamZOYoomoXCt-~i~~?~-i+>]mOOxLaYZCaCOhu<_l__+~Q|t[:", "             nQOa]~+_lcwU0qakOkmbkaQQQQULZwaawqkC0[bwJwdUCmoXwOv]lIi-uaa(/, ", "               pJda1/YmQLqUXYYhwdu}r{   ^,,;\"^;     r)n)w00L[OwYhX[/kbY^    ", "                 1fXQZaan^                                    :fj/r{j:      "];
+const COLS=["                                         aaaa                               ", "                                         aaaaaaa                            ", "                     bcd      aaaaaaaa    aaaaaaab             bd           ", "                    bccc       aaaaaaaaaaaaaaaaaaaa  a         bccb         ", "                   bccccd       aaaaaaaaaaaaaaaaaaaaaaaa       bcccb        ", "                  bccccccc  aaaaaaaaaaaaaaaaaaaaaaaaaaaab     bccccdb       ", "                  ccccccccceaaaaaaaaaaaaaaaaaaaaaaaaaaaaa   bcccccccb       ", "                  ccccccccccccfgggggghaaaiaaaaaaaaaaaaaaaggbccccccccb       ", "                  cccccccccccjgggggggggghgghaaaaaaaaaaaahggggdccccccb       ", "               a  dcccccccccegggggggggggggggghhaaaaaaaaaggggggecccccb       ", "               aaaaccccccgegggggggggghahggggggghaaaahhggggggggggcccb        ", "                aaaajccckggggggggggggggggggggggggaaagggggghahggggcb         ", "         gggg  aaaaahgegggggggggggggggggggggggggggahgggggggggggggg       ggg", "          bghggghaaaggggggggggggggggggggggggggggggggggggggggggggggb  gggggg ", "           gaaahggghgggggggggggggggggggggggggggggggggggggggggggggggggggghg  ", "            haaaaggggggggggggggggggggggggggggggggggggggggggggggggggggghag   ", "            gaaaaahggggggggggggggggggggggggggggggggggggggggggggggggggaahg   ", "            ggaaaaahgggggggggggbbbgggggggggggggggggggggggggggggggggfaaag    ", "             ggaaaaagggggggggggbbbbbbbgggggggggggggggggggggbbbbggghaaaf     ", "              ggaaaaaggggggggggbbbbbbblbbbggggggggggggggbbbbbbbgggaaamg     ", "               ggghhhgggggggggggbbbbbbbbbbbbgggggggggbbllbbbbbggghaahg      ", "                 ggggggggggggggggbbbbbbbbbgggggggggggbbbbbbbbgggggggb       ", "                      bgggggggggggggggggggggggggggggggggbbggggggggggg       ", "                       gggggggggggggggggggggggggggggggggggggggggggggb       ", "                        gggggggggggggggggggggggggggggggggggggggggggg        ", "              ggggggggb  gggggggggggggggjdggggggggggkggggggggggggggggg      ", "           gggfhihggggb    gggggggggggggggggggggggggggggggggggggggggggggg   ", "         gghaaahghbgggb  bggggggggggggggggggggggggggggggggggg  bggggmhaaihb ", "          aaahgaaaggagggggggggggggggggggggggggggggggggggggggb  ggghaaggga   ", "        gg bhhaaaggaaaagggggggggggggggggggggggggggggggggggggggggaaggaaamgb  ", "  ggggggggggaaaahgaaaaaggggggggggggggghaaaaaahaaaaahgggggggggggaaaagaaaaagb ", "bggggggggggggghagaaaaahggggggggggggggggggggggggggghhgggggggggggbaaahgaa abb ", "   bggggggggggggb     bggggggggggggggggggggggggggggggggggggggggb   bg       ", "    bggggggggggg      bggggggggggggggggggggggggggggggggggggggggb            ", "     ggggggggg         gggggggggggggggggggggggggggggggggggggggg             ", "      bgg ggggggggg gggbgggggggggggggggggggggggggggggggggggggggbggg  ggg    ", "           bggghhggghhhgbgggggggggggggggggghfggggggggggggggggbgghhfggggggg  ", "            bghaahgghhhggggggggggggggghhiaaaaaahhgggggggggggggggaahggaaaggb ", "           bgggggggggggggggggggggggfaaaaaaaaaaaaaaaahggggggggggggggggghgggg ", "           ghaggghaaaaagggggggggggggaaaaaaaaaaaaaaafggggggggggggaaaaahgghaag", "            gggghaaaaaahggggggggggggggaaaaaaaaaahgggggggggggggghaaaaaaggghhb", "             gggghaaaaigggggggggggggggggggggggggggggggggggggggggaaaaahggggb ", "               gggggggggggggggggggggg   bbbbbbb     gggggggggggggggggggb    ", "                 ggggggggb                                    bggggggb      "];
+
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const CHARS = "][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
+  const rnd = s => s[Math.random() * s.length | 0];
+
+  /* hatch lines on the planet */
+  const hatch = document.getElementById("hatch"), NS = "http://www.w3.org/2000/svg";
+  for (let i = 0; i < 52; i++) {
+    const y = 560 + i * 28, l = document.createElementNS(NS, "path");
+    l.setAttribute("class", "hatch");
+    l.setAttribute("d", `M520 ${y} C 1000 ${y - 120 + (i % 5) * 18}, 1500 ${y - 40}, 2300 ${y - 300}`);
+    if (i % 3 === 0) l.setAttribute("stroke-dasharray", "60 22 4 22");
+    hatch.appendChild(l);
+  }
+
+  /* ---------- Pars ---------- */
+  const pre = document.getElementById("pars");
+  const rows = ROWS.map((txt, y) => {
+    const row = document.createElement("span"); row.className = "r";
+    let i = 0;
+    while (i < txt.length) {
+      const c = COLS[y][i]; let j = i + 1;
+      while (j < txt.length && COLS[y][j] === c) j++;
+      const s = document.createElement("span");
+      s.textContent = txt.slice(i, j); s.dataset.t = s.textContent;
+      if (c !== " ") s.style.color = PAL[c];
+      row.appendChild(s); i = j;
+    }
+    pre.appendChild(row); return row;
+  });
+
+
+  /* ---------- fit to the centre of the screen ---------- */
+  const root = document.documentElement;
+  function fit() {
+    const W = innerWidth, H = innerHeight;
+    const f404 = Math.max(72, Math.min(W * 0.3, H * 0.24, 260));
+    const cols = Math.max(...ROWS.map(r => r.length));
+    const byW = (W * 0.9) / (cols * 0.602);
+    const byH = (H * 0.9 - f404 * 0.86) / ((ROWS.length + 1.6) * 1.12);
+    root.style.setProperty("--f404", f404.toFixed(0) + "px");
+    root.style.setProperty("--fs", Math.max(3.4, Math.min(byW, byH, 12)).toFixed(2) + "px");
+  }
+  fit(); addEventListener("resize", fit);
+
+  /* ---------- Pars always reacts ---------- */
+  const stack = document.getElementById("art");
+  const far = document.getElementById("far"), near = document.getElementById("near");
+  let mx = innerWidth / 2, my = innerHeight / 2, active = false, lastMove = 0;
+  const off = rows.map(() => 0);
+  addEventListener("pointermove", e => { mx = e.clientX; my = e.clientY; active = true; lastMove = performance.now(); }, { passive: true });
+  addEventListener("pointerleave", () => active = false);
+
+  let px = 0, py = 0;
+  function frame(t) {
+    /* idle: when nobody moves, an invisible cursor drifts over Pars so he never sits still */
+    if (!active || t - lastMove > 2500) {
+      const r = pre.getBoundingClientRect();
+      mx = r.left + r.width * (0.5 + 0.35 * Math.sin(t / 2300));
+      my = r.top + r.height * (0.5 + 0.45 * Math.sin(t / 1700));
+    }
+    /* parallax */
+    const tx = (mx / innerWidth - .5), ty = (my / innerHeight - .5);
+    px += (tx - px) * .06; py += (ty - py) * .06;
+    stack.style.transform = `translate(${px * -10}px, ${py * -6}px)`;
+    far.setAttribute("transform", `translate(${px * 18} ${py * 12})`);
+    near.setAttribute("transform", `translate(${px * 6} ${py * 4})`);
+
+    /* rows near the cursor ripple sideways and glow purple */
+    const pr = pre.getBoundingClientRect(), lh = pr.height / rows.length;
+    const hit = (my - pr.top) / lh, inside = mx > pr.left - 60 && mx < pr.right + 60;
+    for (let i = 0; i < rows.length; i++) {
+      const d = Math.abs(i - hit);
+      const target = inside && d < 6 ? Math.sin((i - hit) * 1.3 + t / 140) * (6 - d) * 0.9 : 0;
+      off[i] += (target - off[i]) * .18;
+      rows[i].style.transform = Math.abs(off[i]) > .05 ? `translateX(${off[i].toFixed(2)}px)` : "";
+      rows[i].classList.toggle("hot", inside && d < 1.5);
+    }
+    requestAnimationFrame(frame);
+  }
+  if (!reduce) requestAnimationFrame(frame);
+
+  /* random code flicker: a few characters of Pars rewrite themselves now and then */
+  const spans = [...pre.querySelectorAll("span span")].filter(s => s.dataset.t.trim());
+  function flicker(n) {
+    for (let k = 0; k < n; k++) {
+      const s = spans[Math.random() * spans.length | 0], o = s.dataset.t;
+      s.textContent = [...o].map(ch => ch === " " ? " " : Math.random() < .5 ? rnd(CHARS) : ch).join("");
+      setTimeout(() => s.textContent = o, 120 + Math.random() * 220);
+    }
+  }
+  if (!reduce) setInterval(() => flicker(3), 260);
+
+  /* click / tap Pars: he shakes off the whole code layer for a moment */
+  function scramble() {
+    if (reduce) return;
+    spans.forEach(s => s.textContent = [...s.dataset.t].map(ch => ch === " " ? " " : rnd(CHARS)).join(""));
+    let n = 0; const id = setInterval(() => {
+      spans.forEach(s => { if (Math.random() < .35) s.textContent = s.dataset.t; });
+      if (++n > 6) { clearInterval(id); spans.forEach(s => s.textContent = s.dataset.t); }
+    }, 70);
+  }
+  pre.addEventListener("click", scramble);
+})();
+</script>
+</body>
+</html>
