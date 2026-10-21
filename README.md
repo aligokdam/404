@@ -1,4 +1,4 @@
-# 404 · Pars
+# 404 · Eror · Pars
 
 A 404 page with nothing on it but **404** and **Pars** an original character rebuilt from lines of code.
 
