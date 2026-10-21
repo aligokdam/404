@@ -1,6 +1,6 @@
 # 404 · Pars
 
-A 404 page with nothing on it but **404** and **Pars** — an original character rebuilt from lines of code.
+A 404 page with nothing on it but **404** and **Pars** an original character rebuilt from lines of code.
 
 🌐 **Live demo:** [aligokdam.github.io/404](https://aligokdam.github.io/404/)
 
